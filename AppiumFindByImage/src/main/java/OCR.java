@@ -24,6 +24,7 @@ The MIT License (MIT)
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
@@ -54,14 +55,15 @@ public class OCR {
 
     /**
      * clickByImage is the main method that you should be using to tap on elements on screen using an image.
-     * @param targetImgPath takes path to the screenshot of an element that you want to find.
+     * @param // takes path to the screenshot of an element that you want to find.
      */
-    public void clickByImage(String targetImgPath) {
-        Point2D coords = getCoords(takeScreenshot(), targetImgPath);
+    public void clickByImage(Point2D  coords) {
         if ((coords.getX() >= 0) && (coords.getY() >= 0)) {
+            TouchAction touchAction = new TouchAction(driver);
+            touchAction.tap(PointOption.point((int)coords.getX(),(int)coords.getY())).perform();
             //driver.tap(1, (int) coords.getX(), (int) coords.getY(), 100);
         } else {
-            throw new ElementNotVisibleException("Element not found - " + targetImgPath);
+            throw new ElementNotVisibleException("Element not found - " );
         }
     }
 

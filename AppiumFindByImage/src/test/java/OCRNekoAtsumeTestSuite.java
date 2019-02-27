@@ -21,8 +21,8 @@ public class OCRNekoAtsumeTestSuite {
     private WebDriverWait wait;
     private OCR OCR;
     private File imgDir;
-    public static String userName = "yuval23";
-    public static String accessKey = "pZ3LWi9niEsKU5apzQEy";
+    public static String userName = "benreich2";
+    public static String accessKey = "KxsSSvfQqR17qkgPxkPe";
     @Before
     public void setUp() throws Exception {
 
@@ -31,10 +31,10 @@ public class OCRNekoAtsumeTestSuite {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("device", "Google Nexus 6");
         caps.setCapability("os_version", "6.0");
-        caps.setCapability("app", "bs://214d407a35c24004db63ffe27de8ee954c264eac");
+        caps.setCapability("app", "bs://4e17df6bb22f4d5d6159eea5757a0aa089a7b8e0");
         caps.setCapability("real_mobile", "true");
-        caps.setCapability("browserstack.local", "false");
-        caps.setCapability("browserstack.debug", "true");
+        //caps.setCapability("browserstack.local", "false");
+        //caps.setCapability("browserstack.debug", "true");
 
 
         AndroidDriver driver = new AndroidDriver(new URL("https://"+userName+":"+accessKey+"@hub-cloud.browserstack.com/wd/hub"), caps);
@@ -73,10 +73,10 @@ public class OCRNekoAtsumeTestSuite {
        // FileUtils.copyFile(scrFile, new File("./screenShots/test.png"));
         //Sikuli settings
         OCR = new OCR(driver);
-        Point2D xy = OCR.getCoords(bi , "C:\\Yuval\\Work\\Tremor\\AppiumFindByImage\\src\\main\\resources\\ladybug.png");
-        OCR.clickByImage("lasybug.png");
+        Point2D xy = OCR.getCoords(bi , "/Users/taptica/Desktop/TremorAutomationTesting/mobileAutomation-/AppiumFindByImage/src/main/resources/ladybug.png");
+        //OCR.clickByImage("lasybug.png");
         System.out.println(xy.getX() +"  " + xy.getY());
-
+        OCR.clickByImage(xy);
         //location of screenshots
         File classpathRoot = new File(System.getProperty("user.dir"));
         imgDir = new File(classpathRoot, "src/main/resources");
@@ -92,33 +92,8 @@ public class OCRNekoAtsumeTestSuite {
     }
 
     @Test
-    public void gatherAllGiftsTest() {
-        String giftsAwaitImgLoc = imgDir + "/giftsAwait.png";
-        String acceptAllImgLoc = imgDir + "/acceptAll.png";
-
-        OCR.waitUntilImageExists(giftsAwaitImgLoc, 30);
-        OCR.clickByImage(giftsAwaitImgLoc);
-        OCR.waitUntilImageExists(acceptAllImgLoc, 10);
-        OCR.clickByImage(acceptAllImgLoc);
+    public void print(){
+        System.out.println("End Test");
     }
 
-    @Test
-    public void refillTest() {
-        String foodBowlImgLoc = imgDir + "/foodBowl.png";
-        String yesBowlImgLoc = imgDir + "/yesBowl.png";
-
-        OCR.waitUntilImageExists(foodBowlImgLoc, 30);
-        OCR.clickByImage(foodBowlImgLoc);
-        OCR.clickByImage(yesBowlImgLoc);
-    }
-
-    @Test
-    public void refillWithLongPressTest() {
-        String foodBowlImgLoc = imgDir + "/foodBowl.png";
-        String yesBowlImgLoc = imgDir + "/yesBowl.png";
-
-        OCR.waitUntilImageExists(foodBowlImgLoc, 30);
-        OCR.longPressByImage(foodBowlImgLoc);
-        OCR.longPressByImage(yesBowlImgLoc);
-    }
 }
